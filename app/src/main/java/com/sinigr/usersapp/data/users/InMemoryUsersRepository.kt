@@ -14,6 +14,11 @@ class InMemoryUsersRepository : IUsersRepository {
         this.users.addAll(users)
     }
 
+    override fun replaceAll(users: List<UserEntity>) {
+        this.users.clear()
+        this.users.addAll(users)
+    }
+
     override fun remove(user: UserEntity) {
         users.remove(user)
     }

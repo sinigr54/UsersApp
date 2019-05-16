@@ -8,6 +8,8 @@ interface IUsersRepository {
 
     fun addAll(users: List<UserEntity>)
 
+    fun replaceAll(users: List<UserEntity>)
+
     fun remove(user: UserEntity)
 
     fun updateBy(id: Long, user: UserEntity)

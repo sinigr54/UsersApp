@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sinigr.usersapp.base.BaseFragment
+import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.users_list.interactor.IUsersListInteractor
+import com.sinigr.usersapp.modules.main.users_list.presenter.IUsersListPresenter
 import org.koin.android.ext.android.inject
 
-class UsersListFragment : BaseFragment() {
+class UsersListFragment : BaseFragment(), IUsersListView {
 
     companion object {
         fun newInstance(): UsersListFragment {
@@ -16,7 +18,7 @@ class UsersListFragment : BaseFragment() {
         }
     }
 
-    val interactor: IUsersListInteractor by inject()
+    private val presenter: IUsersListPresenter by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -25,7 +27,16 @@ class UsersListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        presenter.attachView(this)
+
+        presenter.loadUsers()
+    }
+
+    override fun onUsersLoaded(users: List<UserEntity>) {
 
     }
 
+    override fun onError(message: String) {
+
+    }
 }

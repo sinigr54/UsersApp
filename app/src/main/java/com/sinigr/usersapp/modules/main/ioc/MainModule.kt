@@ -29,7 +29,7 @@ val mainModule = module {
     single<IEditUsersRouter> { EditUsersRouter() }
     single<IEditUserPresenter> { EditUserPresenter(get(), get()) }
 
-    single<IUsersListInteractor> { UsersListInteractor() }
+    single<IUsersListInteractor> { UsersListInteractor(get(), get(), get()) }
     single<IUsersListRouter> { UsersListRouter() }
 
 }
