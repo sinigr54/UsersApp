@@ -22,4 +22,7 @@
     <string name="edit_user_button_title_edit">Save</string>
     <string name="edit_user_button_title_create">Create</string>
 
+    <string name="edit_user_snack_bar_message_edit">User edited</string>
+    <string name="edit_user_snack_bar_message_create">User created</string>
+
 </resources>

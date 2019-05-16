@@ -30,7 +30,7 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState)
 
         adapter = UsersAdapter(requireActivity()) { user ->
-            val action = UsersListFragmentDirections.actionUsersListFragmentToEditUserFragment(user.id!!)
+            val action = UsersListFragmentDirections.actionUsersListFragmentToUpdateUserFragment(user.id!!)
             findNavController().navigate(action)
         }
     }
@@ -52,7 +52,7 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
         rvUsers.layoutManager = LinearLayoutManager(requireActivity())
 
         btnAddUser.setOnClickListener {
-            findNavController().navigate(UsersListFragmentDirections.actionUsersListFragmentToEditUserFragment())
+            findNavController().navigate(UsersListFragmentDirections.actionUsersListFragmentToCreateUserFragment())
         }
 
         presenter.loadUsers()

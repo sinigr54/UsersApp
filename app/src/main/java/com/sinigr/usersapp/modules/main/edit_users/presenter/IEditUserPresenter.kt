@@ -6,7 +6,7 @@ import com.sinigr.usersapp.modules.main.edit_users.view.IEditUserView
 interface IEditUserPresenter : IPresenter<IEditUserView> {
     fun getUser(id: Long)
 
-    fun createUser()
+    fun createUser(firstName: String, lastName: String, email: String)
 
-    fun updateUser()
+    fun updateUser(id: Long, firstName: String, lastName: String, email: String)
 }

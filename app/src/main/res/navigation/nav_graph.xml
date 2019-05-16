@@ -10,24 +10,35 @@
         android:label="UsersListFragment">
 
         <action
-            android:id="@+id/action_usersListFragment_to_editUserFragment"
-            app:destination="@id/editUserFragment"
+            android:id="@+id/action_usersListFragment_to_updateUserFragment"
+            app:destination="@id/updateUserFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:launchSingleTop="false"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_usersListFragment_to_createUserFragment"
+            app:destination="@id/createUserFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
-        android:id="@+id/editUserFragment"
-        android:name="com.sinigr.usersapp.modules.main.edit_users.view.EditUserFragment"
-        android:label="EditUserFragment">
+        android:id="@+id/updateUserFragment"
+        android:name="com.sinigr.usersapp.modules.main.edit_users.view.UpdateUserFragment"
+        android:label="UpdateUserFragment">
 
         <argument
             android:name="id"
             android:defaultValue="-1L"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/createUserFragment"
+        android:name="com.sinigr.usersapp.modules.main.edit_users.view.CreateUserFragment"
+        android:label="CreateUserFragment" />
 
 </navigation>

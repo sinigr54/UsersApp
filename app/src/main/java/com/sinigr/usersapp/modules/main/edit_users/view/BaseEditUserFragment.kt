@@ -14,21 +14,16 @@ import com.sinigr.usersapp.modules.main.edit_users.presenter.IEditUserPresenter
 import kotlinx.android.synthetic.main.fragment_edit_user.*
 import org.koin.android.ext.android.inject
 
-class EditUserFragment : BaseFragment(), IEditUserView {
+abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
 
     companion object {
+        private const val TAG = "EditUserFragment"
+
         private const val DEFAULT_ID = -1L
     }
 
-    enum class EditMode {
-        Create,
-        Update
-    }
-
-    private val presenter: IEditUserPresenter by inject()
-    private val args: EditUserFragmentArgs by navArgs()
-
-    private lateinit var editMode: EditMode
+    protected val presenter: IEditUserPresenter by inject()
+    protected val args: UpdateUserFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_edit_user, container, false)
@@ -40,36 +35,27 @@ class EditUserFragment : BaseFragment(), IEditUserView {
         presenter.attachView(this)
 
         if (args.id != DEFAULT_ID) {
-            editMode = EditMode.Update
             presenter.getUser(args.id)
-        } else {
-            editMode = EditMode.Create
+        }
+
+        btnSave.setOnClickListener {
+            sendData()
         }
 
         setViewTitles()
     }
 
+    protected abstract fun sendData()
+
+    protected abstract fun setTitle()
+
+    protected abstract fun setButtonTitle()
+
+    protected abstract fun successEditAction()
+
     private fun setViewTitles() {
         setTitle()
         setButtonTitle()
-    }
-
-    private fun setTitle() {
-        val title = when (editMode) {
-            EditMode.Create -> getString(R.string.edit_user_title_create)
-            EditMode.Update -> getString(R.string.edit_user_title_edit)
-        }
-
-        setSupportActionbar(title, true)
-    }
-
-    private fun setButtonTitle() {
-        val title = when (editMode) {
-            EditMode.Create -> getString(R.string.edit_user_button_title_create)
-            EditMode.Update -> getString(R.string.edit_user_button_title_edit)
-        }
-
-        btnSave.text = title
     }
 
     private fun initializeUserInfo(user: UserEntity) {
@@ -77,6 +63,7 @@ class EditUserFragment : BaseFragment(), IEditUserView {
             .load(user.avatarUrl)
             .centerCrop()
             .apply(RequestOptions.circleCropTransform())
+            .error(R.drawable.ic_default_avatar)
             .into(ivAvatar)
 
         etFirstName.setText(user.firstName)
@@ -89,7 +76,7 @@ class EditUserFragment : BaseFragment(), IEditUserView {
     }
 
     override fun onUserUpdated(user: UserEntity) {
-
+        successEditAction()
     }
 
     override fun onDestroyView() {
@@ -97,4 +84,5 @@ class EditUserFragment : BaseFragment(), IEditUserView {
 
         super.onDestroyView()
     }
+
 }

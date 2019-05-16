@@ -1,5 +1,6 @@
 package com.sinigr.usersapp.modules.main.edit_users.interactor
 
+import android.util.Log
 import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
@@ -54,9 +55,9 @@ class EditUserInteractor(
                         }
                     }
                 } catch (e: HttpException) {
-
+                    e.printStackTrace()
                 } catch (e: Throwable) {
-
+                    e.printStackTrace()
                 }
             }
         )

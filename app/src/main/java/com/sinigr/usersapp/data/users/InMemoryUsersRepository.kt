@@ -4,7 +4,7 @@ import com.sinigr.usersapp.entity.UserEntity
 
 class InMemoryUsersRepository : IUsersRepository {
 
-    private var users: ArrayList<UserEntity> = arrayListOf()
+    private val users: ArrayList<UserEntity> = arrayListOf()
 
     override fun add(user: UserEntity) {
         users.add(user)
@@ -28,7 +28,10 @@ class InMemoryUsersRepository : IUsersRepository {
     }
 
     override fun updateBy(id: Long, user: UserEntity) {
-        // TODO
+        val index = users.indexOf(users.find { it.id == id })
+        if (index != -1) {
+            users[index] = user
+        }
     }
 
     override fun getUsers(): List<UserEntity> {

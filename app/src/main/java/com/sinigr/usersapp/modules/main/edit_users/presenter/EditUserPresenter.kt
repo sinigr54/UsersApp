@@ -1,5 +1,6 @@
 package com.sinigr.usersapp.modules.main.edit_users.presenter
 
+import android.util.Log
 import com.sinigr.usersapp.modules.main.edit_users.interactor.IEditUserInteractor
 import com.sinigr.usersapp.modules.main.edit_users.view.IEditUserView
 
@@ -17,10 +18,10 @@ class EditUserPresenter(
         })
     }
 
-    override fun createUser() {
+    override fun createUser(firstName: String, lastName: String, email: String) {
         view?.showLoadingDialog()
 
-        interactor.createUser("A", "C", "e", {
+        interactor.createUser(firstName, lastName, email, {
             view?.onUserUpdated(it)
             view?.dismissLoadingDialog()
         }, { code, message ->
@@ -28,10 +29,10 @@ class EditUserPresenter(
         })
     }
 
-    override fun updateUser() {
+    override fun updateUser(id: Long, firstName: String, lastName: String, email: String) {
         view?.showLoadingDialog()
 
-        interactor.updateUser(1, "A", "B", "e", {
+        interactor.updateUser(id, firstName, lastName, email, {
             view?.onUserUpdated(it)
             view?.dismissLoadingDialog()
         }, { code, message ->
@@ -44,4 +45,5 @@ class EditUserPresenter(
 
         super.detachView()
     }
+
 }
