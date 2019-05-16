@@ -49,6 +49,10 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
         rv_users.adapter = adapter
         rv_users.layoutManager = LinearLayoutManager(requireActivity())
 
+        btn_add_user.setOnClickListener {
+            findNavController().navigate(UsersListFragmentDirections.actionUsersListFragmentToEditUserFragment())
+        }
+
         presenter.loadUsers()
     }
 
