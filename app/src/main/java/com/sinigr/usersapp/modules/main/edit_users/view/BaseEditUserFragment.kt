@@ -11,6 +11,7 @@ import com.sinigr.usersapp.R
 import com.sinigr.usersapp.base.BaseFragment
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.edit_users.presenter.IEditUserPresenter
+import com.sinigr.usersapp.modules.main.edit_users.view.validation.DefaultEditUserViewsValidator
 import kotlinx.android.synthetic.main.fragment_edit_user.*
 import org.koin.android.ext.android.inject
 
@@ -38,8 +39,14 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
             presenter.getUser(args.id)
         }
 
+        val viewsValidator = DefaultEditUserViewsValidator(requireContext(), tilFirstName, tilLastName, tilEmail)
+
         btnSave.setOnClickListener {
-            sendData()
+            viewsValidator.checkValidation { isValid ->
+                if (isValid) {
+                    sendData()
+                }
+            }
         }
 
         setViewTitles()

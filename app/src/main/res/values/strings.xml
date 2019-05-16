@@ -19,6 +19,10 @@
     <string name="edit_user_hint_last_name">Last Name</string>
     <string name="edit_user_hint_email">Email</string>
 
+    <string name="edit_user_error_first_name">First name required</string>
+    <string name="edit_user_error_last_name">Last name required</string>
+    <string name="edit_user_error_email">Email incorrect</string>
+
     <string name="edit_user_button_title_edit">Save</string>
     <string name="edit_user_button_title_create">Create</string>
 

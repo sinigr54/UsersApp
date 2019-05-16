@@ -1,7 +1,6 @@
 package com.sinigr.usersapp.modules.main.edit_users.view
 
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.snackbar.Snackbar
 import com.sinigr.usersapp.R
 import kotlinx.android.synthetic.main.fragment_edit_user.*
 
