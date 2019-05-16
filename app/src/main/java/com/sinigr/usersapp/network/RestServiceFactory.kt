@@ -7,8 +7,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RestCore {
-    private const val BASE_URL = "https://bb-test-server.herokuapp.com"
+object RestServiceFactory {
+    private const val BASE_URL = "https://frogogo-test.herokuapp.com"
 
     private var retrofit: Retrofit? = null
 

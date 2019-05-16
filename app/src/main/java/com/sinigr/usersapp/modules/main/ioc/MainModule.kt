@@ -10,7 +10,7 @@ import com.sinigr.usersapp.modules.main.users_list.interactor.UsersListInteracto
 import com.sinigr.usersapp.modules.main.users_list.interactor.IUsersListInteractor
 import com.sinigr.usersapp.modules.main.users_list.presenter.IUsersListPresenter
 import com.sinigr.usersapp.modules.main.users_list.presenter.UsersListPresenter
-import com.sinigr.usersapp.network.RestCore
+import com.sinigr.usersapp.network.RestServiceFactory
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
 import com.sinigr.usersapp.network.services.IUsersNetworkService
 import org.koin.dsl.module
@@ -19,7 +19,7 @@ val mainModule = module {
 
     single<IUsersRepository> { InMemoryUsersRepository() }
 
-    single { RestCore.createService(IUsersNetworkService::class.java) }
+    single { RestServiceFactory.createService(IUsersNetworkService::class.java) }
 
     single { CoroutineNetworkManager() }
 

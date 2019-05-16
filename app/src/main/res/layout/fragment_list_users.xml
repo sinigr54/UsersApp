@@ -3,11 +3,9 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/button"
-            android:text="Жми"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 </FrameLayout>

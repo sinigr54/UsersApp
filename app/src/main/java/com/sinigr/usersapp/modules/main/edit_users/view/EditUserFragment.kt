@@ -15,7 +15,7 @@ import org.koin.android.ext.android.inject
 class EditUserFragment : BaseFragment(), IEditUserView {
 
     companion object {
-        private const val DEFAULT_ARG = -1L
+        private const val DEFAULT_ID = -1L
     }
 
     private val presenter: IEditUserPresenter by inject()
@@ -29,6 +29,10 @@ class EditUserFragment : BaseFragment(), IEditUserView {
         super.onViewCreated(view, savedInstanceState)
 
         presenter.attachView(this)
+
+        if (args.id != DEFAULT_ID) {
+            lbl.text = args.id.toString()
+        }
     }
 
     override fun onUserLoaded(user: UserEntity) {

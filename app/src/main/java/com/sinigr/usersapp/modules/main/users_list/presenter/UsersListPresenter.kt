@@ -14,11 +14,11 @@ class UsersListPresenter(
 
         interactor.loadUsers({
             view?.onUsersLoaded(it)
+            view?.dismissLoadingDialog()
         }, { code, message ->
-
+            view?.dismissLoadingDialog()
+            view?.onError(message)
         })
-
-        view?.dismissLoadingDialog()
     }
 
     override fun detachView() {

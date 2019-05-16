@@ -22,11 +22,10 @@ class EditUserPresenter(
 
         interactor.createUser("A", "C", "e", {
             view?.onUserUpdated(it)
+            view?.dismissLoadingDialog()
         }, { code, message ->
-
+            view?.dismissLoadingDialog()
         })
-
-        view?.dismissLoadingDialog()
     }
 
     override fun updateUser() {
@@ -34,11 +33,10 @@ class EditUserPresenter(
 
         interactor.updateUser(1, "A", "B", "e", {
             view?.onUserUpdated(it)
+            view?.dismissLoadingDialog()
         }, { code, message ->
-
+            view?.dismissLoadingDialog()
         })
-
-        view?.dismissLoadingDialog()
     }
 
     override fun detachView() {
