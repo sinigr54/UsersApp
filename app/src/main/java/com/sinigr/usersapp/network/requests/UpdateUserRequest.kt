@@ -1,5 +1,9 @@
 package com.sinigr.usersapp.network.requests
 
-import com.sinigr.usersapp.entity.UserEntity
+class UserRequest(
+    private val firsName: String,
+    private val lastName: String,
+    private val email: String
+)
 
-class UpdateUserRequest(val user: UserEntity)
+class UpdateUserRequest(private val user: UserRequest)

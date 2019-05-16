@@ -1,6 +1,6 @@
 package com.sinigr.usersapp.base
 
-interface IBasePresenter<View : IBaseView> {
+interface IPresenter<View : IView> {
 
     var view: View?
 
@@ -11,5 +11,4 @@ interface IBasePresenter<View : IBaseView> {
     fun detachView() {
         view = null
     }
-
 }

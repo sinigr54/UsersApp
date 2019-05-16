@@ -2,7 +2,7 @@ package com.sinigr.usersapp.data.users
 
 import com.sinigr.usersapp.entity.UserEntity
 
-class InMemoryUsersRepository : UsersRepository {
+class InMemoryUsersRepository : IUsersRepository {
 
     private var users: ArrayList<UserEntity> = arrayListOf()
 

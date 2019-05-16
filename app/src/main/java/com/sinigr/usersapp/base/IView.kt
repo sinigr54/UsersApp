@@ -1,6 +1,6 @@
 package com.sinigr.usersapp.base
 
-interface IBaseView {
+interface IView {
 
     fun showLoadingDialog()
 

@@ -2,7 +2,7 @@ package com.sinigr.usersapp.data.users
 
 import com.sinigr.usersapp.entity.UserEntity
 
-interface UsersRepository {
+interface IUsersRepository {
 
     fun add(user: UserEntity)
 

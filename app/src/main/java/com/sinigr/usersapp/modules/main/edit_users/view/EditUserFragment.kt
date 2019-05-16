@@ -53,8 +53,10 @@ class EditUserFragment : BaseFragment(), IEditUserView {
         super.onViewCreated(view, savedInstanceState)
 
         presenter.attachView(this)
+    }
 
-        presenter.back()
+    override fun onUserUpdated(user: UserEntity) {
+
     }
 
     override fun onDestroyView() {
@@ -62,5 +64,4 @@ class EditUserFragment : BaseFragment(), IEditUserView {
 
         super.onDestroyView()
     }
-
 }

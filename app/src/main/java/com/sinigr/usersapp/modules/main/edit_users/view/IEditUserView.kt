@@ -1,6 +1,8 @@
 package com.sinigr.usersapp.modules.main.edit_users.view
 
-import com.sinigr.usersapp.base.IBaseView
+import com.sinigr.usersapp.base.IView
+import com.sinigr.usersapp.entity.UserEntity
 
-interface IEditUserView : IBaseView {
+interface IEditUserView : IView {
+    fun onUserUpdated(user: UserEntity)
 }
