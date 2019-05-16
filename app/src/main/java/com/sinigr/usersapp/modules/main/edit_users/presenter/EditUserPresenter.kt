@@ -1,6 +1,5 @@
 package com.sinigr.usersapp.modules.main.edit_users.presenter
 
-import android.util.Log
 import com.sinigr.usersapp.modules.main.edit_users.interactor.IEditUserInteractor
 import com.sinigr.usersapp.modules.main.edit_users.view.IEditUserView
 
