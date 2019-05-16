@@ -3,6 +3,8 @@ package com.sinigr.usersapp.modules.main.edit_users.interactor
 import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
+import com.sinigr.usersapp.network.network_manager.OnError
+import com.sinigr.usersapp.network.network_manager.OnSuccessWithData
 import com.sinigr.usersapp.network.network_manager.Result
 import com.sinigr.usersapp.network.requests.UpdateUserRequest
 import com.sinigr.usersapp.network.requests.UserRequest
@@ -12,14 +14,14 @@ import retrofit2.HttpException
 
 class EditUserInteractor(
     private val usersRepository: IUsersRepository,
-    private val userNetworkService: IUsersNetworkService,
+    private val usersNetworkService: IUsersNetworkService,
     private val networkManager: CoroutineNetworkManager
 ) : IEditUserInteractor {
 
     override var jobs: ArrayList<Job> = arrayListOf()
 
     override fun createUser(firstName: String, lastName: String, email: String,
-                            success: (UserEntity) -> Unit, error: (Int, String) -> Unit) {
+                            success: OnSuccessWithData<UserEntity>, error: OnError) {
 
         val requestBody = UserRequest(firstName, lastName, email)
 
@@ -27,7 +29,7 @@ class EditUserInteractor(
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = networkManager.safeCall {
-                        userNetworkService.createUserAsync(UpdateUserRequest(requestBody)).await()
+                        usersNetworkService.createUserAsync(UpdateUserRequest(requestBody)).await()
                     }
 
                     withContext(Dispatchers.Main) {
@@ -51,7 +53,7 @@ class EditUserInteractor(
     }
 
     override fun updateUser(id: Long, firstName: String, lastName: String, email: String,
-                            success: (UserEntity) -> Unit, error: (Int, String) -> Unit) {
+                            success: OnSuccessWithData<UserEntity>, error: OnError) {
 
         val requestBody = UserRequest(firstName, lastName, email)
 
@@ -59,7 +61,7 @@ class EditUserInteractor(
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val response = networkManager.safeCall {
-                        userNetworkService.updateUserAsync(id, UpdateUserRequest(requestBody)).await()
+                        usersNetworkService.updateUserAsync(id, UpdateUserRequest(requestBody)).await()
                     }
 
                     withContext(Dispatchers.Main) {
