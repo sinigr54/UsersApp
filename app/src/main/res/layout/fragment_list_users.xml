@@ -12,7 +12,17 @@
             android:layout_height="match_parent"
             tools:context=".modules.main.MainActivity">
 
+        <com.google.android.material.appbar.AppBarLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+            <include layout="@layout/toolbar"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.recyclerview.widget.RecyclerView
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 android:id="@+id/rv_users"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

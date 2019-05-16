@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
 
     <string name="full_name_format">%1$s %2$s</string>
+
+    <string name="users_list_title">Users</string>
 </resources>

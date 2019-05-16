@@ -42,6 +42,8 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setSupportActionbar(R.string.users_list_title)
+
         srlRefresh.setOnRefreshListener(this)
 
         presenter.attachView(this)
