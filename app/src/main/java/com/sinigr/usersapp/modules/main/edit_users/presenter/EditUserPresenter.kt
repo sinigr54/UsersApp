@@ -1,15 +1,21 @@
 package com.sinigr.usersapp.modules.main.edit_users.presenter
 
 import com.sinigr.usersapp.modules.main.edit_users.interactor.IEditUserInteractor
-import com.sinigr.usersapp.modules.main.edit_users.router.IEditUsersRouter
 import com.sinigr.usersapp.modules.main.edit_users.view.IEditUserView
 
 class EditUserPresenter(
-    private val router: IEditUsersRouter,
     private val interactor: IEditUserInteractor
 ) : IEditUserPresenter {
 
     override var view: IEditUserView? = null
+
+    override fun getUser(id: Long) {
+        interactor.getUser(id, {
+
+        }, { code, message ->
+
+        })
+    }
 
     override fun createUser() {
         view?.showLoadingDialog()
@@ -33,10 +39,6 @@ class EditUserPresenter(
         })
 
         view?.dismissLoadingDialog()
-    }
-
-    override fun back() {
-        router.back()
     }
 
     override fun detachView() {

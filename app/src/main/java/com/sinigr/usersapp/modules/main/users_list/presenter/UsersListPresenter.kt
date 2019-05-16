@@ -1,11 +1,9 @@
 package com.sinigr.usersapp.modules.main.users_list.presenter
 
 import com.sinigr.usersapp.modules.main.users_list.interactor.IUsersListInteractor
-import com.sinigr.usersapp.modules.main.users_list.router.IUsersListRouter
 import com.sinigr.usersapp.modules.main.users_list.view.IUsersListView
 
 class UsersListPresenter(
-    private val router: IUsersListRouter,
     private val interactor: IUsersListInteractor
 ) : IUsersListPresenter {
 

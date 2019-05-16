@@ -12,5 +12,7 @@ interface IUsersRepository {
 
     fun remove(user: UserEntity)
 
+    fun findBy(id: Long): UserEntity?
+
     fun updateBy(id: Long, user: UserEntity)
 }

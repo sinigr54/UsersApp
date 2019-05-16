@@ -23,6 +23,10 @@ class InMemoryUsersRepository : IUsersRepository {
         users.remove(user)
     }
 
+    override fun findBy(id: Long): UserEntity? {
+        return users.find { it.id == id }
+    }
+
     override fun updateBy(id: Long, user: UserEntity) {
         // TODO
     }

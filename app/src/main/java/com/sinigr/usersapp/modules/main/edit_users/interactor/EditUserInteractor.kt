@@ -20,6 +20,16 @@ class EditUserInteractor(
 
     override var jobs: ArrayList<Job> = arrayListOf()
 
+    override fun getUser(id: Long, success: OnSuccessWithData<UserEntity>, error: OnError) {
+        val user = usersRepository.findBy(id)
+
+        if (user != null) {
+            success.invoke(user)
+        } else {
+            error.invoke(111, "sd")
+        }
+    }
+
     override fun createUser(firstName: String, lastName: String, email: String,
                             success: OnSuccessWithData<UserEntity>, error: OnError) {
 
