@@ -5,4 +5,6 @@ import com.sinigr.usersapp.modules.main.users_list.view.IUsersListView
 
 interface IUsersListPresenter : IPresenter<IUsersListView> {
     fun loadUsers()
+
+    fun refreshUsers()
 }

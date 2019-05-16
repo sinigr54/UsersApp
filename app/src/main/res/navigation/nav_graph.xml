@@ -10,16 +10,12 @@
 
         <action
                 android:id="@+id/action_usersListFragment_to_editUserFragment"
-                app:destination="@id/editUserFragment"/>
+                app:destination="@id/editUserFragment" app:launchSingleTop="false"/>
     </fragment>
 
     <fragment android:id="@+id/editUserFragment"
               android:name="com.sinigr.usersapp.modules.main.edit_users.view.EditUserFragment"
               android:label="EditUserFragment">
-
-        <action android:id="@+id/action_editUserFragment_to_usersListFragment"
-                app:destination="@id/usersListFragment"
-                app:popUpToInclusive="true" app:popUpTo="@+id/usersListFragment"/>
 
         <argument android:name="id"
                   app:argType="long"

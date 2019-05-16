@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sinigr.usersapp.R
 import com.sinigr.usersapp.base.BaseFragment
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.users_list.adapter.UsersAdapter
-import com.sinigr.usersapp.modules.main.users_list.interactor.IUsersListInteractor
 import com.sinigr.usersapp.modules.main.users_list.presenter.IUsersListPresenter
 import kotlinx.android.synthetic.main.fragment_list_users.*
 import org.koin.android.ext.android.inject
 
-class UsersListFragment : BaseFragment(), IUsersListView {
+class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnRefreshListener {
 
     companion object {
         private const val TAG = "UsersListFragment"
@@ -29,7 +29,7 @@ class UsersListFragment : BaseFragment(), IUsersListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter = UsersAdapter(activity!!) { user ->
+        adapter = UsersAdapter(requireActivity()) { user ->
             val action = UsersListFragmentDirections.actionUsersListFragmentToEditUserFragment(user.id!!)
             findNavController().navigate(action)
         }
@@ -42,16 +42,30 @@ class UsersListFragment : BaseFragment(), IUsersListView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        srlRefresh.setOnRefreshListener(this)
+
         presenter.attachView(this)
 
         rv_users.adapter = adapter
-        rv_users.layoutManager = LinearLayoutManager(activity)
+        rv_users.layoutManager = LinearLayoutManager(requireActivity())
 
         presenter.loadUsers()
     }
 
+    override fun onRefresh() {
+        presenter.refreshUsers()
+    }
+
+    override fun showLoadingDialog() {
+        srlRefresh.isRefreshing = true
+    }
+
+    override fun dismissLoadingDialog() {
+        srlRefresh.isRefreshing = false
+    }
+
     override fun onUsersLoaded(users: List<UserEntity>) {
-        adapter.addAll(users)
+        adapter.setData(users)
     }
 
     override fun onError(message: String) {

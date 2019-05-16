@@ -4,8 +4,8 @@
              android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lbl"
             android:text="Работает!"
+            android:id="@+id/lbl"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

@@ -18,7 +18,7 @@ class UsersAdapter(context: Activity, listener: ClickListener) : ListDelegationA
         )
     }
 
-    fun addAll(users: List<UserEntity>) {
+    fun setData(users: List<UserEntity>) {
         setItems(users)
         notifyDataSetChanged()
     }

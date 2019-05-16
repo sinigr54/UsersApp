@@ -15,4 +15,8 @@ interface IUsersRepository {
     fun findBy(id: Long): UserEntity?
 
     fun updateBy(id: Long, user: UserEntity)
+
+    fun getUsers(): List<UserEntity>
+
+    fun isEmpty(): Boolean
 }

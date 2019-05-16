@@ -30,4 +30,12 @@ class InMemoryUsersRepository : IUsersRepository {
     override fun updateBy(id: Long, user: UserEntity) {
         // TODO
     }
+
+    override fun getUsers(): List<UserEntity> {
+        return users
+    }
+
+    override fun isEmpty(): Boolean {
+        return users.isEmpty()
+    }
 }
