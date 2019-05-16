@@ -2,7 +2,24 @@
     <string name="app_name">UsersApp</string>
     <string name="action_settings">Settings</string>
 
+    <!--Utility-->
     <string name="full_name_format">%1$s %2$s</string>
 
+    <!--Transitions-->
+    <string name="avatar_transition_name">avatar</string>
+
+    <!--Users-->
     <string name="users_list_title">Users</string>
+
+    <!--Edit/Create user-->
+    <string name="edit_user_title_edit">Edit user</string>
+    <string name="edit_user_title_create">Create user</string>
+
+    <string name="edit_user_hint_first_name">First Name</string>
+    <string name="edit_user_hint_last_name">Last Name</string>
+    <string name="edit_user_hint_email">Email</string>
+
+    <string name="edit_user_button_title_edit">Save</string>
+    <string name="edit_user_button_title_create">Create</string>
+
 </resources>

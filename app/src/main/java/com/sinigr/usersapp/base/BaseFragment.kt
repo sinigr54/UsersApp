@@ -2,21 +2,23 @@ package com.sinigr.usersapp.base
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.toolbar.*
 
 abstract class BaseFragment : Fragment(), IView {
 
-    fun setSupportActionbar(title: Int, isShowBackArrow: Boolean = false) {
-        val textTitle = resources.getString(title)
-
+    fun setSupportActionbar(title: String, isShowBackArrow: Boolean = false) {
         val appCompatActivity = (requireActivity() as? AppCompatActivity)
-        appCompatActivity?.setSupportActionBar(toolbar)
 
         val actionBar = appCompatActivity?.supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(isShowBackArrow)
         actionBar?.setDisplayShowHomeEnabled(isShowBackArrow)
 
-        actionBar?.title = textTitle
+        actionBar?.title = title
+    }
+
+    fun setSupportActionbar(title: Int, isShowBackArrow: Boolean = false) {
+        val textTitle = resources.getString(title)
+
+        setSupportActionbar(textTitle, isShowBackArrow)
     }
 
     override fun showLoadingDialog() {

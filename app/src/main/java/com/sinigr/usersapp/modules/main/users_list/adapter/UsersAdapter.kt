@@ -1,6 +1,7 @@
 package com.sinigr.usersapp.modules.main.users_list.adapter
 
 import android.app.Activity
+import android.view.View
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.users_list.adapter.delegates.UserAdapterDelegate

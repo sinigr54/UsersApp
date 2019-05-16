@@ -53,8 +53,8 @@ class UserAdapterDelegate(private val context: Activity,
     }
 
     class Holder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivAvatar: AppCompatImageView = view.findViewById(R.id.avatar)
-        val tvFullName: AppCompatTextView = view.findViewById(R.id.full_name)
-        val tvEmail: AppCompatTextView = view.findViewById(R.id.email)
+        val ivAvatar: AppCompatImageView = view.findViewById(R.id.ivAvatar)
+        val tvFullName: AppCompatTextView = view.findViewById(R.id.tvFullName)
+        val tvEmail: AppCompatTextView = view.findViewById(R.id.tvEmail)
     }
 }

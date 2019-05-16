@@ -11,7 +11,7 @@ class EditUserPresenter(
 
     override fun getUser(id: Long) {
         interactor.getUser(id, {
-
+            view?.onUserLoaded(it)
         }, { code, message ->
 
         })

@@ -42,16 +42,16 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setSupportActionbar(R.string.users_list_title)
+        setSupportActionbar(getString(R.string.users_list_title))
 
         srlRefresh.setOnRefreshListener(this)
 
         presenter.attachView(this)
 
-        rv_users.adapter = adapter
-        rv_users.layoutManager = LinearLayoutManager(requireActivity())
+        rvUsers.adapter = adapter
+        rvUsers.layoutManager = LinearLayoutManager(requireActivity())
 
-        btn_add_user.setOnClickListener {
+        btnAddUser.setOnClickListener {
             findNavController().navigate(UsersListFragmentDirections.actionUsersListFragmentToEditUserFragment())
         }
 
