@@ -2,6 +2,7 @@ package com.sinigr.usersapp.data.users
 
 import com.sinigr.usersapp.entity.UserEntity
 
+// TODO implement with suspend functions for support DB async functions
 interface IUsersRepository {
 
     fun add(user: UserEntity)
