@@ -1,6 +1,5 @@
 package com.sinigr.usersapp.modules.main.edit_users.presenter
 
-import com.sinigr.usersapp.base.interactor.subscriber.ISubscriber
 import com.sinigr.usersapp.base.interactor.subscriber.Subscriber
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.edit_users.interactor.IEditUserInteractor
@@ -30,7 +29,7 @@ class EditUserPresenter(
         interactor.createUser(firstName, lastName, email, object :
             Subscriber<UserEntity>() {
             override fun onSuccess(data: UserEntity) {
-                view?.onUserUpdated(data)
+                view?.onUserEdited(data)
             }
 
             override fun onError(code: Int, message: String) {
@@ -49,7 +48,7 @@ class EditUserPresenter(
         interactor.updateUser(id, firstName, lastName, email, object :
             Subscriber<UserEntity>() {
             override fun onSuccess(data: UserEntity) {
-                view?.onUserUpdated(data)
+                view?.onUserEdited(data)
             }
 
             override fun onError(code: Int, message: String) {

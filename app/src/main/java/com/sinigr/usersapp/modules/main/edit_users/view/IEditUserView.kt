@@ -6,5 +6,5 @@ import com.sinigr.usersapp.entity.UserEntity
 interface IEditUserView : IView {
     fun onUserLoaded(user: UserEntity)
 
-    fun onUserUpdated(user: UserEntity)
+    fun onUserEdited(user: UserEntity)
 }

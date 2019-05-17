@@ -82,7 +82,7 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
         initializeUserInfo(user)
     }
 
-    override fun onUserUpdated(user: UserEntity) {
+    override fun onUserEdited(user: UserEntity) {
         successEditAction()
     }
 
