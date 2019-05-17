@@ -29,4 +29,7 @@
     <string name="edit_user_snack_bar_message_edit">User edited</string>
     <string name="edit_user_snack_bar_message_create">User created</string>
 
+    <!--Errors-->
+    <string name="error_not_found">User does not exist</string>
+
 </resources>

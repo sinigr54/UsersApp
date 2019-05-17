@@ -1,13 +1,13 @@
 package com.sinigr.usersapp.modules.main.users_list.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import com.sinigr.usersapp.R
 import com.sinigr.usersapp.base.BaseFragment
 import com.sinigr.usersapp.entity.UserEntity
@@ -75,7 +75,7 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
     }
 
     override fun onError(message: String) {
-
+        Snackbar.make(srlRefresh, message, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

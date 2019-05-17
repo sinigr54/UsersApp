@@ -3,6 +3,7 @@ package com.sinigr.usersapp.modules.main.edit_users.interactor
 import com.sinigr.usersapp.base.interactor.subscriber.ISubscriber
 import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
+import com.sinigr.usersapp.network.errors.ErrorConstants
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
 import com.sinigr.usersapp.network.network_manager.Result
 import com.sinigr.usersapp.network.requests.UpdateUserRequest
@@ -25,7 +26,7 @@ class EditUserInteractor(
         if (user != null) {
             subscriber.onSuccess(user)
         } else {
-            subscriber.onError(1, "1ad")
+            subscriber.onError(ErrorConstants.NOT_FOUND.code, ErrorConstants.NOT_FOUND.message)
         }
 
         subscriber.onFinish()

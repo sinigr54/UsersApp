@@ -7,4 +7,6 @@ interface IEditUserView : IView {
     fun onUserLoaded(user: UserEntity)
 
     fun onUserEdited(user: UserEntity)
+
+    fun onError(message: String)
 }

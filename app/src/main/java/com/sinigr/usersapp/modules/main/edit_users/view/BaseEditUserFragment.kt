@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import com.sinigr.usersapp.R
 import com.sinigr.usersapp.base.BaseFragment
 import com.sinigr.usersapp.entity.UserEntity
@@ -84,6 +85,10 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
 
     override fun onUserEdited(user: UserEntity) {
         successEditAction()
+    }
+
+    override fun onError(message: String) {
+        Snackbar.make(root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

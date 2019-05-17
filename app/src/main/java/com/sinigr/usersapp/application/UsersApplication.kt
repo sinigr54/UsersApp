@@ -8,8 +8,14 @@ import org.koin.core.context.startKoin
 
 class UsersApplication : Application() {
 
+    companion object {
+        lateinit var instance: UsersApplication
+    }
+
     override fun onCreate() {
         super.onCreate()
+
+        instance = this
 
         RestServiceFactory.init()
 

@@ -4,6 +4,7 @@ import com.sinigr.usersapp.base.interactor.subscriber.Subscriber
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.edit_users.interactor.IEditUserInteractor
 import com.sinigr.usersapp.modules.main.edit_users.view.IEditUserView
+import com.sinigr.usersapp.network.errors.ErrorConstants
 
 class EditUserPresenter(
     private val interactor: IEditUserInteractor
@@ -18,7 +19,7 @@ class EditUserPresenter(
             }
 
             override fun onError(code: Int, message: String) {
-
+                view?.onError(message)
             }
         })
     }
@@ -52,7 +53,11 @@ class EditUserPresenter(
             }
 
             override fun onError(code: Int, message: String) {
-
+                // TODO dependent of error code we can choose our action or message
+                //  for user with help NetworkErrors class
+                if (code == ErrorConstants.NOT_FOUND.code) {
+                    view?.onError(ErrorConstants.NOT_FOUND.message)
+                }
             }
 
             override fun onFinish() {

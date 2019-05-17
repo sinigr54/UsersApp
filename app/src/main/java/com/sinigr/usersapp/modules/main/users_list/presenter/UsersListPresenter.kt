@@ -2,7 +2,6 @@ package com.sinigr.usersapp.modules.main.users_list.presenter
 
 import com.sinigr.usersapp.base.interactor.subscriber.Subscriber
 import com.sinigr.usersapp.data.users.IUsersRepository
-import com.sinigr.usersapp.data.users.InMemoryUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.users_list.interactor.IUsersListInteractor
 import com.sinigr.usersapp.modules.main.users_list.view.IUsersListView
