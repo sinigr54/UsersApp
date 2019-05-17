@@ -25,10 +25,16 @@ class UsersListInteractor(
                         usersNetworkService.getUsersAsync().await()
                     }
 
+                    // Insert into repository in IO context
+                    when (result) {
+                        is Result.Success -> {
+                            usersRepository.replaceAll(result.data)
+                        }
+                    }
+
                     withContext(Dispatchers.Main) {
                         when (result) {
                             is Result.Success -> {
-                                usersRepository.replaceAll(result.data)
                                 subscriber.onSuccess(result.data)
                             }
                             is Result.Error -> {

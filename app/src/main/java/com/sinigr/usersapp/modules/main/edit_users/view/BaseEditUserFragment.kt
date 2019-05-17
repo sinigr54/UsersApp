@@ -69,9 +69,8 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
     private fun initializeUserInfo(user: UserEntity) {
         Glide.with(requireActivity())
             .load(user.avatarUrl)
-            .centerCrop()
             .apply(RequestOptions.circleCropTransform())
-            .error(R.drawable.ic_default_avatar)
+            .error(R.drawable.ic_default_user)
             .into(ivAvatar)
 
         etFirstName.setText(user.firstName)

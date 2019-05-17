@@ -47,7 +47,7 @@ class UserAdapterDelegate(private val context: Activity,
             Glide.with(context)
                 .load(item.avatarUrl)
                 .apply(RequestOptions.circleCropTransform())
-                .error(R.drawable.ic_default_avatar)
+                .error(R.drawable.ic_default_user)
                 .into(ivAvatar)
         }
     }
