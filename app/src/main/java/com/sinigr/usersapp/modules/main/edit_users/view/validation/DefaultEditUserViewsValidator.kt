@@ -115,6 +115,11 @@ class DefaultEditUserViewsValidator(
             Criteria(emailEditText)
                 .test(object : Criteria.Condition<TextInputLayout> {
                     override fun evaluate(view: TextInputLayout): Boolean {
+                        return !isBlankPredicate(view.editText)
+                    }
+                })
+                .test(object : Criteria.Condition<TextInputLayout> {
+                    override fun evaluate(view: TextInputLayout): Boolean {
                         return isCorrectEmailPredicate(view.editText)
                     }
                 })
@@ -135,7 +140,10 @@ class DefaultEditUserViewsValidator(
         })
     }
 
-    private fun bindTextWatcher(view: TextInputLayout, action: DefaultEditUserViewsValidator.(TextInputLayout) -> Unit) {
+    private fun bindTextWatcher(
+        view: TextInputLayout,
+        action: DefaultEditUserViewsValidator.(TextInputLayout) -> Unit
+    ) {
         view.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
