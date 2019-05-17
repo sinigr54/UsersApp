@@ -1,10 +1,9 @@
 package com.sinigr.usersapp.modules.main.users_list.interactor
 
+import com.sinigr.usersapp.base.interactor.subscriber.ISubscriber
 import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
-import com.sinigr.usersapp.network.network_manager.OnError
-import com.sinigr.usersapp.network.network_manager.OnSuccessWithData
 import com.sinigr.usersapp.network.network_manager.Result
 import com.sinigr.usersapp.network.services.IUsersNetworkService
 import kotlinx.coroutines.*
@@ -16,9 +15,9 @@ class UsersListInteractor(
     private val networkManager: CoroutineNetworkManager
 ) : IUsersListInteractor {
 
-    override var jobs: ArrayList<Job> = arrayListOf()
+    override var jobs: MutableSet<Job> = hashSetOf()
 
-    override fun loadUsers(success: OnSuccessWithData<List<UserEntity>>, error: OnError) {
+    override fun loadUsers(subscriber: ISubscriber<List<UserEntity>>) {
         addJob(
             CoroutineScope(Dispatchers.IO).launch {
                 try {
@@ -30,12 +29,14 @@ class UsersListInteractor(
                         when (result) {
                             is Result.Success -> {
                                 usersRepository.replaceAll(result.data)
-                                success.invoke(result.data)
+                                subscriber.onSuccess(result.data)
                             }
                             is Result.Error -> {
-                                error.invoke(result.code, result.message)
+                                subscriber.onError(result.code, result.message)
                             }
                         }
+
+                        subscriber.onFinish()
                     }
                 } catch (e: HttpException) {
 

@@ -1,11 +1,9 @@
 package com.sinigr.usersapp.modules.main.edit_users.interactor
 
-import android.util.Log
+import com.sinigr.usersapp.base.interactor.subscriber.ISubscriber
 import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
-import com.sinigr.usersapp.network.network_manager.OnError
-import com.sinigr.usersapp.network.network_manager.OnSuccessWithData
 import com.sinigr.usersapp.network.network_manager.Result
 import com.sinigr.usersapp.network.requests.UpdateUserRequest
 import com.sinigr.usersapp.network.requests.UserRequest
@@ -19,20 +17,23 @@ class EditUserInteractor(
     private val networkManager: CoroutineNetworkManager
 ) : IEditUserInteractor {
 
-    override var jobs: ArrayList<Job> = arrayListOf()
+    override var jobs: MutableSet<Job> = hashSetOf()
 
-    override fun getUser(id: Long, success: OnSuccessWithData<UserEntity>, error: OnError) {
+    override fun getUser(id: Long, subscriber: ISubscriber<UserEntity>) {
         val user = usersRepository.findBy(id)
 
         if (user != null) {
-            success.invoke(user)
+            subscriber.onSuccess(user)
         } else {
-            error.invoke(111, "sd")
+            subscriber.onError(1, "1ad")
         }
+
+        subscriber.onFinish()
     }
 
     override fun createUser(firstName: String, lastName: String, email: String,
-                            success: OnSuccessWithData<UserEntity>, error: OnError) {
+                            subscriber: ISubscriber<UserEntity>
+    ) {
 
         val requestBody = UserRequest(firstName, lastName, email)
 
@@ -47,12 +48,14 @@ class EditUserInteractor(
                         when (response) {
                             is Result.Success -> {
                                 usersRepository.add(response.data)
-                                success.invoke(response.data)
+                                subscriber.onSuccess(response.data)
                             }
                             is Result.Error -> {
-                                error.invoke(response.code, response.message)
+                                subscriber.onError(response.code, response.message)
                             }
                         }
+
+                        subscriber.onFinish()
                     }
                 } catch (e: HttpException) {
                     e.printStackTrace()
@@ -64,7 +67,8 @@ class EditUserInteractor(
     }
 
     override fun updateUser(id: Long, firstName: String, lastName: String, email: String,
-                            success: OnSuccessWithData<UserEntity>, error: OnError) {
+                            subscriber: ISubscriber<UserEntity>
+    ) {
 
         val requestBody = UserRequest(firstName, lastName, email)
 
@@ -79,12 +83,14 @@ class EditUserInteractor(
                         when (response) {
                             is Result.Success -> {
                                 usersRepository.updateBy(id, response.data)
-                                success.invoke(response.data)
+                                subscriber.onSuccess(response.data)
                             }
                             is Result.Error -> {
-                                error.invoke(response.code, response.message)
+                                subscriber.onError(response.code, response.message)
                             }
                         }
+
+                        subscriber.onFinish()
                     }
                 } catch (e: HttpException) {
 

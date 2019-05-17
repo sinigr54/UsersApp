@@ -1,10 +1,10 @@
-package com.sinigr.usersapp.base
+package com.sinigr.usersapp.base.interactor
 
 import kotlinx.coroutines.Job
 
 interface ICoroutineInteractor {
 
-    var jobs: ArrayList<Job>
+    var jobs: MutableSet<Job>
 
     fun addJob(job: Job) {
         jobs.add(job)
