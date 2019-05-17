@@ -32,8 +32,9 @@ class EditUserInteractor(
         subscriber.onFinish()
     }
 
-    override fun createUser(firstName: String, lastName: String, email: String,
-                            subscriber: ISubscriber<UserEntity>
+    override fun createUser(
+        firstName: String, lastName: String, email: String,
+        subscriber: ISubscriber<UserEntity>
     ) {
 
         val requestBody = UserRequest(firstName, lastName, email)
@@ -67,8 +68,9 @@ class EditUserInteractor(
         )
     }
 
-    override fun updateUser(id: Long, firstName: String, lastName: String, email: String,
-                            subscriber: ISubscriber<UserEntity>
+    override fun updateUser(
+        id: Long, firstName: String, lastName: String, email: String,
+        subscriber: ISubscriber<UserEntity>
     ) {
 
         val requestBody = UserRequest(firstName, lastName, email)

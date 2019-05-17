@@ -8,14 +8,16 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import com.sinigr.usersapp.R
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.users_list.adapter.ClickListener
 
-class UserAdapterDelegate(private val context: Activity,
-                          private val listener: ClickListener
+class UserAdapterDelegate(
+    private val context: Activity,
+    private val listener: ClickListener
 ) :
     AbsListItemAdapterDelegate<UserEntity, UserEntity, UserAdapterDelegate.Holder>() {
 
@@ -46,7 +48,9 @@ class UserAdapterDelegate(private val context: Activity,
 
             Glide.with(context)
                 .load(item.avatarUrl)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .apply(RequestOptions.circleCropTransform())
+                .placeholder(R.drawable.ic_default_user)
                 .error(R.drawable.ic_default_user)
                 .into(ivAvatar)
         }
