@@ -1,5 +1,6 @@
 package com.sinigr.usersapp.network
 
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.*
@@ -7,19 +8,23 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RestServiceFactory {
-    private const val BASE_URL = "https://frogogo-test.herokuapp.com"
+class RestServiceFactory {
+    companion object {
+        private const val BASE_URL = "https://frogogo-test.herokuapp.com"
+    }
 
     private var retrofit: Retrofit? = null
 
-    fun init() {
+    init {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
 
-        val gson = GsonBuilder().create()
+        val gson = GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create()
 
         retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))

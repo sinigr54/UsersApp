@@ -43,8 +43,8 @@ class UserAdapterDelegate(
                 listener.invoke(item)
             }
 
-            tvFullName.text = context.getString(R.string.full_name_format, item.firstName, item.lastName)
-            tvEmail.text = item.email
+            fullNameTextView.text = context.getString(R.string.full_name_format, item.firstName, item.lastName)
+            emailTextView.text = item.email
 
             Glide.with(context)
                 .load(item.avatarUrl)
@@ -52,13 +52,13 @@ class UserAdapterDelegate(
                 .apply(RequestOptions.circleCropTransform())
                 .placeholder(R.drawable.ic_default_user)
                 .error(R.drawable.ic_default_user)
-                .into(ivAvatar)
+                .into(avatarImageView)
         }
     }
 
     class Holder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivAvatar: AppCompatImageView = view.findViewById(R.id.ivAvatar)
-        val tvFullName: AppCompatTextView = view.findViewById(R.id.tvFullName)
-        val tvEmail: AppCompatTextView = view.findViewById(R.id.tvEmail)
+        val avatarImageView: AppCompatImageView = view.findViewById(R.id.avatarImageView)
+        val fullNameTextView: AppCompatTextView = view.findViewById(R.id.fullNameTextView)
+        val emailTextView: AppCompatTextView = view.findViewById(R.id.emailTextView)
     }
 }

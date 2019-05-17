@@ -19,10 +19,6 @@ val mainModule = module {
 
     single<IUsersRepository> { InMemoryUsersRepository() }
 
-    single { RestServiceFactory.createService(IUsersNetworkService::class.java) }
-
-    single { CoroutineNetworkManager() }
-
     single<IEditUserInteractor> { EditUserInteractor(get(), get(), get()) }
     single<IEditUserPresenter> { EditUserPresenter(get()) }
 

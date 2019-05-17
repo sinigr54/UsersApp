@@ -13,13 +13,13 @@ class CreateUserFragment : BaseEditUserFragment() {
 
     override fun setButtonTitle() {
         val title = getString(R.string.edit_user_button_title_create)
-        btnSave.text = title
+        saveButton.text = title
     }
 
     override fun sendData() {
         presenter.createUser(
-            etFirstName.text.toString().trim(), etLastName.text.toString().trim(),
-            etEmail.text.toString().trim()
+            firstNameEditText.text.toString().trim(), lastNameEditText.text.toString().trim(),
+            emailEditText.text.toString().trim()
         )
     }
 

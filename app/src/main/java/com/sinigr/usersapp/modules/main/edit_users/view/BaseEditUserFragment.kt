@@ -40,9 +40,12 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
             presenter.getUser(args.id)
         }
 
-        val viewsValidator = DefaultEditUserViewsValidator(requireContext(), tilFirstName, tilLastName, tilEmail)
+        val viewsValidator = DefaultEditUserViewsValidator(
+            requireContext(), firstNameTextInputLayout,
+            lastNameTextInputLayout, emailTextInputLayout
+        )
 
-        btnSave.setOnClickListener {
+        saveButton.setOnClickListener {
             viewsValidator.checkValidation { isValid ->
                 if (isValid) {
                     sendData()
@@ -71,11 +74,11 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
             .load(user.avatarUrl)
             .apply(RequestOptions.circleCropTransform())
             .error(R.drawable.ic_default_user)
-            .into(ivAvatar)
+            .into(avatarImageView)
 
-        etFirstName.setText(user.firstName)
-        etLastName.setText(user.lastName)
-        etEmail.setText(user.email)
+        firstNameEditText.setText(user.firstName)
+        lastNameEditText.setText(user.lastName)
+        emailEditText.setText(user.email)
     }
 
     override fun onUserLoaded(user: UserEntity) {

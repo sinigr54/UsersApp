@@ -45,14 +45,14 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
 
         setSupportActionbar(getString(R.string.users_list_title))
 
-        srlRefresh.setOnRefreshListener(this)
+        swipeRefreshLayout.setOnRefreshListener(this)
 
         presenter.attachView(this)
 
-        rvUsers.adapter = adapter
-        rvUsers.layoutManager = LinearLayoutManager(requireActivity())
+        usersRecyclerView.adapter = adapter
+        usersRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
-        btnAddUser.setOnClickListener {
+        addUserButton.setOnClickListener {
             findNavController().navigate(UsersListFragmentDirections.actionUsersListFragmentToCreateUserFragment())
         }
 
@@ -64,11 +64,11 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
     }
 
     override fun showLoadingDialog() {
-        srlRefresh.isRefreshing = true
+        swipeRefreshLayout.isRefreshing = true
     }
 
     override fun dismissLoadingDialog() {
-        srlRefresh.isRefreshing = false
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onUsersLoaded(users: List<UserEntity>) {
@@ -76,7 +76,7 @@ class UsersListFragment : BaseFragment(), IUsersListView, SwipeRefreshLayout.OnR
     }
 
     override fun onError(message: String) {
-        Snackbar.make(srlRefresh, message, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(swipeRefreshLayout, message, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

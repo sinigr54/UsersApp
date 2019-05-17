@@ -13,14 +13,14 @@ import com.sinigr.usersapp.utility.view_validation.ViewValidator
 
 class DefaultEditUserViewsValidator(
     private val context: Context,
-    private val firstNameEditText: TextInputLayout,
-    private val lastNameEditText: TextInputLayout,
-    private val emailEditText: TextInputLayout
+    private val firstNameTextInputLayout: TextInputLayout,
+    private val lastNameTextInputLayout: TextInputLayout,
+    private val emailEditTextInputLayout: TextInputLayout
 ) {
 
-    private lateinit var firstNameNotBlankValidator: ViewValidator<TextInputLayout>
-    private lateinit var lastNameNotBlankValidator: ViewValidator<TextInputLayout>
-    private lateinit var emailCorrectValidator: ViewValidator<TextInputLayout>
+    private lateinit var firstNameIsNotBlankValidator: ViewValidator<TextInputLayout>
+    private lateinit var lastNameIsNotBlankValidator: ViewValidator<TextInputLayout>
+    private lateinit var emailIsCorrectValidator: ViewValidator<TextInputLayout>
 
     init {
         initFirstNameValidator()
@@ -29,16 +29,16 @@ class DefaultEditUserViewsValidator(
 
         initEmailValidator()
 
-        bindTextWatcher(firstNameEditText) {
-            resetView(firstNameEditText)
+        bindTextWatcher(firstNameTextInputLayout) {
+            resetView(firstNameTextInputLayout)
         }
 
-        bindTextWatcher(lastNameEditText) {
-            resetView(lastNameEditText)
+        bindTextWatcher(lastNameTextInputLayout) {
+            resetView(lastNameTextInputLayout)
         }
 
-        bindTextWatcher(emailEditText) {
-            resetView(emailEditText)
+        bindTextWatcher(emailEditTextInputLayout) {
+            resetView(emailEditTextInputLayout)
         }
     }
 
@@ -49,20 +49,20 @@ class DefaultEditUserViewsValidator(
     }
 
     private fun isValid(): Boolean {
-        return !isBlankPredicate(firstNameEditText.editText) &&
-                !isBlankPredicate(lastNameEditText.editText) &&
-                isCorrectEmailPredicate(emailEditText.editText)
+        return !isBlankPredicate(firstNameTextInputLayout.editText) &&
+                !isBlankPredicate(lastNameTextInputLayout.editText) &&
+                isCorrectEmailPredicate(emailEditTextInputLayout.editText)
     }
 
     private fun validate() {
-        firstNameNotBlankValidator.validate()
-        lastNameNotBlankValidator.validate()
-        emailCorrectValidator.validate()
+        firstNameIsNotBlankValidator.validate()
+        lastNameIsNotBlankValidator.validate()
+        emailIsCorrectValidator.validate()
     }
 
     private fun initFirstNameValidator() {
-        firstNameNotBlankValidator = ViewValidator(
-            Criteria(firstNameEditText)
+        firstNameIsNotBlankValidator = ViewValidator(
+            Criteria(firstNameTextInputLayout)
                 .test(object : Criteria.Condition<TextInputLayout> {
                     override fun evaluate(view: TextInputLayout): Boolean {
                         return !isBlankPredicate(view.editText)
@@ -70,7 +70,7 @@ class DefaultEditUserViewsValidator(
                 })
         )
 
-        firstNameNotBlankValidator.observe(object : Observer<TextInputLayout>(firstNameEditText) {
+        firstNameIsNotBlankValidator.observe(object : Observer<TextInputLayout>(firstNameTextInputLayout) {
             override fun onValidationCompleted(
                 view: TextInputLayout,
                 validationResult: ViewValidator.ValidationResult
@@ -86,8 +86,8 @@ class DefaultEditUserViewsValidator(
     }
 
     private fun initLastNameValidator() {
-        lastNameNotBlankValidator = ViewValidator(
-            Criteria(lastNameEditText)
+        lastNameIsNotBlankValidator = ViewValidator(
+            Criteria(lastNameTextInputLayout)
                 .test(object : Criteria.Condition<TextInputLayout> {
                     override fun evaluate(view: TextInputLayout): Boolean {
                         return !isBlankPredicate(view.editText)
@@ -95,7 +95,7 @@ class DefaultEditUserViewsValidator(
                 })
         )
 
-        lastNameNotBlankValidator.observe(object : Observer<TextInputLayout>(lastNameEditText) {
+        lastNameIsNotBlankValidator.observe(object : Observer<TextInputLayout>(lastNameTextInputLayout) {
             override fun onValidationCompleted(
                 view: TextInputLayout,
                 validationResult: ViewValidator.ValidationResult
@@ -111,8 +111,8 @@ class DefaultEditUserViewsValidator(
     }
 
     private fun initEmailValidator() {
-        emailCorrectValidator = ViewValidator(
-            Criteria(emailEditText)
+        emailIsCorrectValidator = ViewValidator(
+            Criteria(emailEditTextInputLayout)
                 .test(object : Criteria.Condition<TextInputLayout> {
                     override fun evaluate(view: TextInputLayout): Boolean {
                         return !isBlankPredicate(view.editText)
@@ -125,7 +125,7 @@ class DefaultEditUserViewsValidator(
                 })
         )
 
-        emailCorrectValidator.observe(object : Observer<TextInputLayout>(emailEditText) {
+        emailIsCorrectValidator.observe(object : Observer<TextInputLayout>(emailEditTextInputLayout) {
             override fun onValidationCompleted(
                 view: TextInputLayout,
                 validationResult: ViewValidator.ValidationResult
