@@ -4,7 +4,8 @@ import com.sinigr.usersapp.base.interactor.subscriber.Subscriber
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.edit_users.interactor.IEditUserInteractor
 import com.sinigr.usersapp.modules.main.edit_users.view.IEditUserView
-import com.sinigr.usersapp.network.errors.ErrorConstants
+import com.sinigr.usersapp.network.errors.Error
+import com.sinigr.usersapp.network.errors.ErrorName
 
 class EditUserPresenter(
     private val interactor: IEditUserInteractor
@@ -18,8 +19,8 @@ class EditUserPresenter(
                 view?.onUserLoaded(data)
             }
 
-            override fun onError(code: Int, message: String) {
-                view?.onError(message)
+            override fun onError(error: Error) {
+                view?.onError(error.message)
             }
         })
     }
@@ -27,14 +28,13 @@ class EditUserPresenter(
     override fun createUser(firstName: String, lastName: String, email: String) {
         view?.showLoadingDialog()
 
-        interactor.createUser(firstName, lastName, email, object :
-            Subscriber<UserEntity>() {
+        interactor.createUser(firstName, lastName, email, object : Subscriber<UserEntity>() {
             override fun onSuccess(data: UserEntity) {
                 view?.onUserEdited(data)
             }
 
-            override fun onError(code: Int, message: String) {
-
+            override fun onError(error: Error) {
+                view?.onError(error.message)
             }
 
             override fun onFinish() {
@@ -46,17 +46,17 @@ class EditUserPresenter(
     override fun updateUser(id: Long, firstName: String, lastName: String, email: String) {
         view?.showLoadingDialog()
 
-        interactor.updateUser(id, firstName, lastName, email, object :
-            Subscriber<UserEntity>() {
+        interactor.updateUser(id, firstName, lastName, email, object : Subscriber<UserEntity>() {
             override fun onSuccess(data: UserEntity) {
                 view?.onUserEdited(data)
             }
 
-            override fun onError(code: Int, message: String) {
-                // TODO dependent of error code we can choose our action or message
+            override fun onError(error: Error) {
+                // TODO: dependent of error code we can choose our action or message
                 //  for user with help NetworkErrors class
-                if (code == ErrorConstants.NOT_FOUND.code) {
-                    view?.onError(ErrorConstants.NOT_FOUND.message)
+                if (error.code == ErrorName.NOT_FOUND.code) {
+                    view?.onError(error.message)
+                    // TODO: maybe another action
                 }
             }
 

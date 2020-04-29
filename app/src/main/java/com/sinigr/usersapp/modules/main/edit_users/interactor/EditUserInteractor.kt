@@ -3,7 +3,9 @@ package com.sinigr.usersapp.modules.main.edit_users.interactor
 import com.sinigr.usersapp.base.interactor.subscriber.ISubscriber
 import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
-import com.sinigr.usersapp.network.errors.ErrorConstants
+import com.sinigr.usersapp.network.errors.Error
+import com.sinigr.usersapp.network.errors.ErrorName
+import com.sinigr.usersapp.network.errors.ErrorFactory
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
 import com.sinigr.usersapp.network.network_manager.Result
 import com.sinigr.usersapp.network.requests.UpdateUserRequest
@@ -15,7 +17,8 @@ import retrofit2.HttpException
 class EditUserInteractor(
     private val usersRepository: IUsersRepository,
     private val usersNetworkService: IUsersNetworkService,
-    private val networkManager: CoroutineNetworkManager
+    private val networkManager: CoroutineNetworkManager,
+    private val errorFactory: ErrorFactory
 ) : IEditUserInteractor {
 
     override var jobs: MutableSet<Job> = hashSetOf()
@@ -26,7 +29,7 @@ class EditUserInteractor(
         if (user != null) {
             subscriber.onSuccess(user)
         } else {
-            subscriber.onError(ErrorConstants.NOT_FOUND.code, ErrorConstants.NOT_FOUND.message)
+            subscriber.onError(errorFactory.errorByName(ErrorName.NOT_FOUND))
         }
 
         subscriber.onFinish()
@@ -52,8 +55,8 @@ class EditUserInteractor(
                                 usersRepository.add(response.data)
                                 subscriber.onSuccess(response.data)
                             }
-                            is Result.Error -> {
-                                subscriber.onError(response.code, response.message)
+                            is Result.Fail -> {
+                                subscriber.onError(Error(response.code, response.message))
                             }
                         }
 
@@ -88,8 +91,8 @@ class EditUserInteractor(
                                 usersRepository.updateBy(id, response.data)
                                 subscriber.onSuccess(response.data)
                             }
-                            is Result.Error -> {
-                                subscriber.onError(response.code, response.message)
+                            is Result.Fail -> {
+                                subscriber.onError(Error(response.code, response.message))
                             }
                         }
 

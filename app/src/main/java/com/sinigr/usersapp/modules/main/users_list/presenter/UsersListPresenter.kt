@@ -5,6 +5,7 @@ import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
 import com.sinigr.usersapp.modules.main.users_list.interactor.IUsersListInteractor
 import com.sinigr.usersapp.modules.main.users_list.view.IUsersListView
+import com.sinigr.usersapp.network.errors.Error
 
 class UsersListPresenter(
     private val interactor: IUsersListInteractor,
@@ -29,8 +30,8 @@ class UsersListPresenter(
                 view?.onUsersLoaded(data)
             }
 
-            override fun onError(code: Int, message: String) {
-                view?.onError(message)
+            override fun onError(error: Error) {
+                view?.onError(error.message)
             }
 
             override fun onFinish() {

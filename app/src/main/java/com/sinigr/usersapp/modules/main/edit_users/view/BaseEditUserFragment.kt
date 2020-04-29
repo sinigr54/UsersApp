@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import com.sinigr.usersapp.R
@@ -24,6 +25,8 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
         private const val DEFAULT_ID = -1L
     }
 
+    private val requestManager: RequestManager by inject()
+
     protected val presenter: IEditUserPresenter by inject()
     protected val args: UpdateUserFragmentArgs by navArgs()
 
@@ -41,8 +44,10 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
         }
 
         val viewsValidator = DefaultEditUserViewsValidator(
-            requireContext(), firstNameTextInputLayout,
-            lastNameTextInputLayout, emailTextInputLayout
+            requireContext(),
+            firstNameTextInputLayout,
+            lastNameTextInputLayout,
+            emailTextInputLayout
         )
 
         saveButton.setOnClickListener {
@@ -70,7 +75,7 @@ abstract class BaseEditUserFragment : BaseFragment(), IEditUserView {
     }
 
     private fun initializeUserInfo(user: UserEntity) {
-        Glide.with(requireActivity())
+        requestManager
             .load(user.avatarUrl)
             .apply(RequestOptions.circleCropTransform())
             .error(R.drawable.ic_default_user)

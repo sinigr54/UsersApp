@@ -10,7 +10,7 @@ open class CoroutineNetworkManager {
         return if (response.isSuccessful) {
             Result.Success(response.body()!!)
         } else {
-            Result.Error(response.code(), response.message())
+            Result.Fail(response.code(), response.message())
         }
     }
 }

@@ -3,6 +3,7 @@ package com.sinigr.usersapp.modules.main.users_list.interactor
 import com.sinigr.usersapp.base.interactor.subscriber.ISubscriber
 import com.sinigr.usersapp.data.users.IUsersRepository
 import com.sinigr.usersapp.entity.UserEntity
+import com.sinigr.usersapp.network.errors.Error
 import com.sinigr.usersapp.network.network_manager.CoroutineNetworkManager
 import com.sinigr.usersapp.network.network_manager.Result
 import com.sinigr.usersapp.network.services.IUsersNetworkService
@@ -37,8 +38,8 @@ class UsersListInteractor(
                             is Result.Success -> {
                                 subscriber.onSuccess(result.data)
                             }
-                            is Result.Error -> {
-                                subscriber.onError(result.code, result.message)
+                            is Result.Fail -> {
+                                subscriber.onError(Error(result.code, result.message))
                             }
                         }
 
