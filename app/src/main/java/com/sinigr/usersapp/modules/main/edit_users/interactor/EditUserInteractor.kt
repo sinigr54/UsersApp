@@ -39,7 +39,6 @@ class EditUserInteractor(
         firstName: String, lastName: String, email: String,
         subscriber: ISubscriber<UserEntity>
     ) {
-
         val requestBody = UserRequest(firstName, lastName, email)
 
         addJob(
@@ -75,7 +74,6 @@ class EditUserInteractor(
         id: Long, firstName: String, lastName: String, email: String,
         subscriber: ISubscriber<UserEntity>
     ) {
-
         val requestBody = UserRequest(firstName, lastName, email)
 
         addJob(
