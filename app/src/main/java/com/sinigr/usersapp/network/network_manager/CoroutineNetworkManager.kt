@@ -4,13 +4,13 @@ import retrofit2.Response
 
 open class CoroutineNetworkManager {
 
-    suspend fun <T : Any> safeCall(call: suspend () -> Response<T>): Result<T> {
+    suspend fun <T : Any> safeCall(call: suspend () -> Response<T>): ResponseResult<T> {
         val response = call.invoke()
 
         return if (response.isSuccessful) {
-            Result.Success(response.body()!!)
+            ResponseResult.Success(response.body()!!)
         } else {
-            Result.Fail(response.code(), response.message())
+            ResponseResult.Fail(response.code(), response.message())
         }
     }
 }

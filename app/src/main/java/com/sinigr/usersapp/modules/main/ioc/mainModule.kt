@@ -25,7 +25,7 @@ val mainModule = module {
     single<IEditUserInteractor> { EditUserInteractor(get(), get(), get(), get()) }
     single<IEditUserPresenter> { EditUserPresenter(get()) }
 
-    single<IUsersListInteractor> { UsersListInteractor(get(), get(), get()) }
+    single<IUsersListInteractor> { UsersListInteractor(get(), get(), get(), get()) }
     single<IUsersListPresenter> { UsersListPresenter(get(), get()) }
 
 }
